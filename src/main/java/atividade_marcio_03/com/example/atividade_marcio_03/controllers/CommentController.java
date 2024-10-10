@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import atividade_marcio_03.com.example.atividade_marcio_03.dtos.CommentDto;
 import atividade_marcio_03.com.example.atividade_marcio_03.models.Comment;
 import atividade_marcio_03.com.example.atividade_marcio_03.services.CommentService;
 
@@ -31,17 +32,17 @@ public class CommentController {
     }
 
     @PostMapping
-    public ResponseEntity<Comment> createComment(@RequestBody Comment comment) {
+    public ResponseEntity<Comment> createComment(@RequestBody CommentDto comment) {
         commentService.save(comment);
-        return new ResponseEntity<>(comment, HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Comment> updateComment(@PathVariable Long id, @RequestBody Comment commentDetails) {
+    public ResponseEntity<Comment> updateComment(@PathVariable Long id, @RequestBody CommentDto commentDetails) {
         Comment comment = commentService.findById(id);
         if (comment != null) {
-            comment.setContent(commentDetails.getContent());
-            commentService.save(comment);
+            comment.setContent(commentDetails.content());
+            commentService.update(comment);
             return new ResponseEntity<>(comment, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);

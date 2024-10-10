@@ -33,8 +33,14 @@ public class CategoryController {
 
     @PostMapping
     public ResponseEntity<Category> createCategory(@RequestBody Category category) {
-        categoryService.save(category);
+        try{
+            categoryService.save(category);
         return new ResponseEntity<>(category, HttpStatus.CREATED);
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PutMapping("/{id}")

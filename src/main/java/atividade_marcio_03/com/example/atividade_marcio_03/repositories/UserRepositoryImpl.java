@@ -23,7 +23,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public List<Usuario> findAll() {
-        return entityManager.createQuery("from User", Usuario.class).getResultList();
+        return entityManager.createQuery("FROM Usuario", Usuario.class).getResultList();
     }
 
     @Override
@@ -42,7 +42,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public Usuario findByEmail(String email) {
-        return entityManager.createQuery("SELECT u FROM usuario u WHERE u.email = :email", Usuario.class)
+        return entityManager.createQuery("SELECT u FROM Usuario u WHERE u.email = :email", Usuario.class)
                             .setParameter("email", email)
                             .getSingleResult();
     }

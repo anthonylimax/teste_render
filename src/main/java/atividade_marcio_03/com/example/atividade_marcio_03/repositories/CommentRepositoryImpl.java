@@ -28,7 +28,7 @@ public class CommentRepositoryImpl implements CommentRepository {
 
     @Override
     public void save(Comment comment) {
-        entityManager.merge(comment);
+        entityManager.persist(comment);
     }
 
     @Override

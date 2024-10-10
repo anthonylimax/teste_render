@@ -28,6 +28,10 @@ public class PostRepositoryImpl implements PostRepository {
 
     @Override
     public void save(Post post) {
+        entityManager.persist(post);
+    }
+    @Override
+    public void merge(Post post) {
         entityManager.merge(post);
     }
 
@@ -39,6 +43,7 @@ public class PostRepositoryImpl implements PostRepository {
             entityManager.remove(entityManager.merge(post));
         }
     }
+
 
     @Override
     public List<Post> findByUserId(Long userId) {
